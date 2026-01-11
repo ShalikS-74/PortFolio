@@ -23,24 +23,27 @@ export async function registerRoutes(
   const existing = await storage.getProjects();
   if (existing.length === 0) {
     await storage.createProject({
-      title: "Neon Horizon",
-      description: "A futuristic dashboard visualization.",
-      imageUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b",
-      tags: ["React", "Three.js", "WebGL"],
+      title: "Tkinter Red Block Game",
+      description: "Mouse-driven survival game: move the red block to dodge bouncing blue blocks across multiple difficulties, with invincibility windows and dynamic speed ramps.",
+      imageUrl: "/images/tkinter-game.png",
+      projectUrl: null,
+      tags: ["Python", "Tkinter", "Game"],
       featured: true
     });
     await storage.createProject({
-      title: "Cyberpunk City",
-      description: "Immersive 3D environment exploration.",
-      imageUrl: "https://images.unsplash.com/photo-1515630278258-407f66498911",
-      tags: ["Framer Motion", "Tailwind"],
-      featured: true
+      title: "Coming soon",
+      description: "Reserved slot for the next project.",
+      imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1200",
+      projectUrl: null,
+      tags: [],
+      featured: false
     });
     await storage.createProject({
-      title: "Digital Nexus",
-      description: "Connectivity platform for the future.",
-      imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475",
-      tags: ["TypeScript", "Drizzle"],
+      title: "Coming soon",
+      description: "Reserved slot for the next project.",
+      imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1200",
+      projectUrl: null,
+      tags: [],
       featured: false
     });
   }

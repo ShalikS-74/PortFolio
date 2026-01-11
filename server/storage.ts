@@ -1,6 +1,4 @@
-import { projects, type Project, type InsertProject } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { type Project, type InsertProject } from "@shared/schema";
 
 export interface IStorage {
   getProjects(): Promise<Project[]>;
@@ -8,20 +6,30 @@ export interface IStorage {
   createProject(project: InsertProject): Promise<Project>;
 }
 
-export class DatabaseStorage implements IStorage {
+// In-memory storage for portfolio (no database needed)
+export class InMemoryStorage implements IStorage {
+  private projects: Project[] = [];
+  private nextId = 1;
+
   async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects);
+    return this.projects;
   }
 
   async getProject(id: number): Promise<Project | undefined> {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id));
-    return project;
+    return this.projects.find(p => p.id === id);
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
-    const [project] = await db.insert(projects).values(insertProject).returning();
+    const project: Project = {
+      id: this.nextId++,
+      featured: false,
+      ...insertProject,
+      tags: insertProject.tags || [],
+      projectUrl: insertProject.projectUrl || null,
+    };
+    this.projects.push(project);
     return project;
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new InMemoryStorage();

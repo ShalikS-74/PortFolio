@@ -22,9 +22,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Projects', href: '#projects' },
     { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Skills', href: '#skills' },
   ];
 
   return (
@@ -45,8 +45,8 @@ export default function Navbar() {
             className="text-2xl font-bold font-display cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-white">LUX</span>
-            <span className="text-gradient-magenta">FUTURE</span>
+            <span className="text-white">Shalik</span>
+            <span className="text-gradient-magenta">.dev</span>
           </motion.div>
         </Link>
 
@@ -66,6 +66,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-6 py-2 rounded-full text-sm font-semibold bg-gradient-to-r from-amber-500 to-pink-600 text-white shadow-lg shadow-pink-500/20 hover:shadow-pink-500/40 transition-all"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Get in Touch
           </motion.button>
@@ -98,7 +99,13 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <button className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-amber-500 to-pink-600 text-white">
+          <button 
+            className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-amber-500 to-pink-600 text-white"
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             Get in Touch
           </button>
         </motion.div>

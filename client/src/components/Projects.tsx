@@ -7,37 +7,40 @@ export default function Projects() {
   const { data: projects, isLoading, error } = useProjects();
 
   // Fallback dummy data if no projects exist in DB yet
-  const dummyProjects = [
+  const fallbackProjects = [
     {
       id: 1,
-      title: "Neon Finance Dashboard",
-      description: "A futuristic financial analytics platform featuring real-time data visualization, AI-driven predictions, and a dark mode interface optimized for trading professionals.",
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
-      projectUrl: "#",
-      tags: ["React", "D3.js", "TypeScript"],
-      featured: true
+      title: "Tkinter Red Block Game",
+      description: "Survival game where you drag the red block with the mouse and dodge bouncing blue blocks; multiple difficulties, invincibility windows, and dynamic speed ramps.",
+      imageUrl: "/images/tkinter-game.png",
+      projectUrl: "https://github.com/ShalikS-74?tab=repositories",
+      sourceUrl: "https://github.com/ShalikS-74?tab=repositories",
+      tags: ["Python", "Tkinter", "Game"],
+      featured: true,
     },
     {
       id: 2,
-      title: "Cyberpunk Social",
-      description: "Decentralized social network built on blockchain technology. Features end-to-end encryption, NFT profile pictures, and zero-knowledge proof authentication.",
-      imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000",
-      projectUrl: "#",
-      tags: ["Web3", "Solidity", "Next.js"],
-      featured: true
+      title: "Coming soon",
+      description: "Reserved slot for the next project.",
+      imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1200",
+      projectUrl: "",
+      sourceUrl: "",
+      tags: [],
+      featured: false,
     },
     {
       id: 3,
-      title: "Zenith AI Assistant",
-      description: "Voice-activated AI assistant for developers. Integrates with IDEs to suggest code optimizations and automate repetitive tasks using natural language processing.",
-      imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
-      projectUrl: "#",
-      tags: ["Python", "OpenAI", "TensorFlow"],
-      featured: false
-    }
+      title: "Coming soon",
+      description: "Reserved slot for the next project.",
+      imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1200",
+      projectUrl: "",
+      sourceUrl: "",
+      tags: [],
+      featured: false,
+    },
   ];
 
-  const displayProjects = (projects && projects.length > 0) ? projects : dummyProjects;
+  const displayProjects = (projects && projects.length > 0) ? projects : fallbackProjects;
 
   if (isLoading) {
     return (
@@ -65,10 +68,10 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
-            Selected <span className="text-gradient-magenta">Works</span>
+            Projects that blend <span className="text-gradient-magenta">AI, web, and play</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            A curated selection of projects that push the boundaries of design and engineering.
+            Experiments, prototypes, and shipping work where I learn in public and iterate fast.
           </p>
         </motion.div>
 

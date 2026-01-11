@@ -30,17 +30,19 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="inline-block px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 mb-6">
-            <span className="text-amber-400 text-sm font-semibold tracking-wider uppercase">Next Gen Design</span>
+            <span className="text-amber-400 text-sm font-semibold tracking-wider uppercase">CSE Student</span>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-            Building the <br />
-            <span className="text-gradient-hero">Digital Future</span>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 whitespace-nowrap">
+            Hey, I'm <span className="text-gradient-hero whitespace-nowrap">Shalik S</span>
           </h1>
-          
-          <p className="text-lg md:text-xl text-gray-400 mb-8 max-w-lg leading-relaxed">
-            Crafting immersive digital experiences with cutting-edge technology and luxury aesthetics. 
-            Defining the intersection of art and engineering.
+
+          <p className="text-lg md:text-xl text-gray-200 mb-3 max-w-2xl leading-relaxed">
+            AI/ML enthusiast, game dev explorer, and full-stack learner crafting interactive experiments.
+          </p>
+
+          <p className="text-base md:text-lg text-gray-400 mb-8 max-w-2xl leading-relaxed">
+            I build at the intersection of AI and play: web apps, chat assistants, and lightweight games that make emerging tech feel tangible.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4">
@@ -48,6 +50,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05, boxShadow: "0 0 30px -5px rgba(251, 191, 36, 0.4)" }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 rounded-xl font-bold text-white bg-white/5 border border-amber-500/50 backdrop-blur-sm relative overflow-hidden group"
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -59,8 +62,9 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 rounded-xl font-bold text-gray-300 hover:text-white transition-colors"
+              onClick={() => window.open('https://www.linkedin.com/in/shalik-sahul-43aaa0378/', '_blank', 'noopener,noreferrer')}
             >
-              Contact Me
+              Connect on LinkedIn
             </motion.button>
           </div>
         </motion.div>

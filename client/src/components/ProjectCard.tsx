@@ -1,11 +1,15 @@
-import { useRef, useState, useEffect } from 'react';
-import * as THREE from 'three';
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github } from 'lucide-react';
 import type { Project } from '@shared/schema';
 
+type ShowcaseProject = Project & {
+  liveUrl?: string;
+  sourceUrl?: string;
+};
+
 interface ProjectCardProps {
-  project: Project;
+  project: ShowcaseProject;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
@@ -45,6 +49,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       shine.style.opacity = '0';
     }
   };
+
+  const liveUrl = project.liveUrl || project.projectUrl;
 
   return (
     <motion.div
@@ -98,19 +104,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </p>
 
             <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0">
-              {project.projectUrl && (
+              {liveUrl && (
                 <a 
-                  href={project.projectUrl} 
+                  href={liveUrl} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors"
                 >
-                  View Live <ExternalLink size={14} />
+                  View Project <ExternalLink size={14} />
                 </a>
               )}
-              <button className="flex items-center gap-2 text-sm font-semibold text-pink-500 hover:text-pink-400 transition-colors">
-                Source Code <Github size={14} />
-              </button>
+              {project.sourceUrl && (
+                <a
+                  href={project.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-semibold text-pink-500 hover:text-pink-400 transition-colors"
+                >
+                  Source Code <Github size={14} />
+                </a>
+              )}
             </div>
           </div>
         </div>
