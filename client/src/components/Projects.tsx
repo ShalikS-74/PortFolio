@@ -1,13 +1,9 @@
-import { useProjects } from "@/hooks/use-projects";
 import ProjectCard from "./ProjectCard";
-import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Projects() {
-  const { data: projects, isLoading, error } = useProjects();
-
   // Fallback dummy data if no projects exist in DB yet
-  const fallbackProjects = [
+  const projects = [
     {
       id: 1,
       title: "Tkinter Red Block Game",
@@ -40,23 +36,7 @@ export default function Projects() {
     },
   ];
 
-  const displayProjects = (projects && projects.length > 0) ? projects : fallbackProjects;
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader2 className="w-10 h-10 text-amber-500 animate-spin" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-20 text-red-400">
-        Failed to load projects. Please try again later.
-      </div>
-    );
-  }
+  const displayProjects = projects;
 
   return (
     <section id="projects" className="py-24 px-6 relative">
