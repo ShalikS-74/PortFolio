@@ -501,27 +501,10 @@ function drawAsciiGlobe(
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
-  // Build 2D grid and compute per-cell colors
-  const cols = rows;
-  const grid: (string | null)[][] = Array.from({ length: rows }, () =>
-    Array(cols).fill(null),
-  );
-  const cellW = width / cols;
-  const cellH = height / rows;
-
-  const colors: { r: number; g: number; b: number; char: string }[] = [];
-
   for (const cell of cells) {
-    const col = Math.min(cols - 1, Math.max(0, Math.floor(cell.px / cellW)));
-    const row = Math.min(rows - 1, Math.max(0, Math.floor(cell.py / cellH)));
-
     const lonRaw = cell.lonBase + rotationDegrees;
     const lon = ((lonRaw % 360) + 360) % 360 - 180;
-    const sz2 = 1 - Math.pow((cell.px - width / 2) / (width / 2), 2) - Math.pow((cell.py - height / 2) / (height / 2), 2);
-    const visible = sz2 >= 0;
-
-    const land = visible ? getLandColor(lon, cell.lat) : null;
-    grid[row][col] = land;
+    const land = getLandColor(lon, cell.lat);
 
     let r: number;
     let g: number;
@@ -540,60 +523,6 @@ function drawAsciiGlobe(
       r = Math.round(8 * cell.brightness);
       g = Math.round(120 * cell.brightness);
       b = Math.round(210 + 45 * cell.brightness);
-    }
-
-    colors.push({ r, g, b, char });
-  }
-
-  // Fill gaps: ocean cells adjacent to land get land color
-  for (let ri = 0; ri < rows; ri++) {
-    for (let ci = 0; ci < cols; ci++) {
-      if (grid[ri][ci] !== null) continue;
-      const neighborColors: string[] = [];
-      for (let dr = -1; dr <= 1; dr++) {
-        for (let dc = -1; dc <= 1; dc++) {
-          if (dr === 0 && dc === 0) continue;
-          const nr = ri + dr;
-          const nc = ci + dc;
-          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] !== null) {
-            neighborColors.push(grid[nr][nc]!);
-          }
-        }
-      }
-      if (neighborColors.length > 0) {
-        grid[ri][ci] = neighborColors.sort((a, b) =>
-          neighborColors.filter(v => v === b).length - neighborColors.filter(v => v === a).length,
-        )[0];
-      }
-    }
-  }
-
-  // Render all cells
-  let ci = 0;
-  for (const cell of cells) {
-    const col = Math.min(cols - 1, Math.max(0, Math.floor(cell.px / cellW)));
-    const row = Math.min(rows - 1, Math.max(0, Math.floor(cell.py / cellH)));
-    const landOverride = grid[row][col];
-    const c = colors[ci++];
-
-    let r: number;
-    let g: number;
-    let b: number;
-    let char: string;
-
-    if (landOverride && (c.char === OCEAN_CHARS[0] || c.char === OCEAN_CHARS[1] || c.char === OCEAN_CHARS[2])) {
-      // This cell was gap-filled — use land styling
-      char = LAND_CHARS[Math.min(2, Math.floor(cell.brightness * 3))];
-      const [lr, lg, lb] = hexRgb(landOverride);
-      const factor = 0.3 + 0.7 * cell.brightness;
-      r = Math.round(lr * factor);
-      g = Math.round(lg * factor);
-      b = Math.round(lb * factor);
-    } else {
-      r = c.r;
-      g = c.g;
-      b = c.b;
-      char = c.char;
     }
 
     ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
