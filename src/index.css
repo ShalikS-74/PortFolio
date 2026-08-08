@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --font-sans: 'Bricolage Grotesque', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-condensed: 'Six Caps', sans-serif;
+  --font-glyph: 'Anton', 'Bricolage Grotesque', sans-serif;
+}
+
+:root, .dark {
+  --ivory: #edebe3;
+  --ink: #0b0b0c;
+  --accent-blue: #2f5cff;
+  --accent-green: #b4ff39;
+
+  --background: 48 24% 91%;
+  --foreground: 240 4% 5%;
+  --primary: 230 90% 50%;
+  --primary-foreground: 0 0% 98%;
+  --muted: 0 0% 90%;
+  --muted-foreground: 0 0% 45%;
+  --border: 0 0% 85%;
+  --card: 0 0% 98%;
+  --card-foreground: 0 0% 8%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--foreground) / 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground) / 0.4);
+}
+
+.font-loader-number {
+  font-family: var(--font-condensed);
+}
