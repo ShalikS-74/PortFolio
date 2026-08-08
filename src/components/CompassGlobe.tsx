@@ -203,7 +203,7 @@ const DESKTOP_GLOBE_CELLS = 58;
 const MOBILE_GLOBE_CELLS = 34;
 const MAX_FPS = 30;
 const FRAME_BUDGET = 1000 / MAX_FPS;
-const DEG_PER_SEC = 8;
+const DEG_PER_SEC = 14;
 const LAND_CACHE = new Map<string, string | null>();
 
 function pointInPolygon(lon: number, lat: number, points: LonLat[]) {
@@ -419,7 +419,7 @@ export default function CompassGlobe() {
         <div
           className="absolute inset-0"
           style={{
-            animation: shouldAnimate ? 'moonOrbit 19s linear infinite' : 'none',
+            animation: shouldAnimate ? 'moonOrbit 11s linear infinite' : 'none',
           }}
         >
           <span

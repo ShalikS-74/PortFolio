@@ -48,7 +48,7 @@ export default function Home() {
       <ManifestoSection
         index="01"
         eyebrow="Operating note"
-        headline="I approach code as a laboratory, making things meant to be touched, played with, and explored rather than just consumed."
+        headline="Games and hard bosses turned me into a curious kid with a controller — open source and ML research turned me into a curious adult with a keyboard."
         fallbackStats={[
           { label: 'Projects Completed', value: 2 },
           { label: 'Years Studying', value: 4 },
