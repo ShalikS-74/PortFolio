@@ -14,7 +14,7 @@ export function useDeviceTier(): MotionTier {
       if (prefersReduced) return 'minimal';
 
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-      const isWideViewport = window.matchMedia('(min-width: 1024px)').matches;
+      const isWideViewport = window.matchMedia('(min-width: 768px)').matches;
       const cores = navigator.hardwareConcurrency ?? 4;
 
       if (isFinePointer && isWideViewport && cores >= 4) return 'full';
@@ -22,7 +22,7 @@ export function useDeviceTier(): MotionTier {
     };
 
     const handler = () => setTier(compute());
-    const viewportQuery = window.matchMedia('(min-width: 1024px)');
+    const viewportQuery = window.matchMedia('(min-width: 768px)');
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const pointerQuery = window.matchMedia('(pointer: fine)');
 
