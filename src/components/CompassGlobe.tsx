@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { useDeviceTier } from '@/hooks/useDeviceTier';
 
 type LonLat = [number, number];
 type GlobeCell = {
@@ -578,31 +577,37 @@ function buildGlobeCells(
 /* ── Component ─────────────────────────────────────────────────────── */
 export default function CompassGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const tier = useDeviceTier();
-  const shouldAnimate = tier !== 'minimal';
-  const cellsPerSide = tier === 'full' ? DESKTOP_GLOBE_CELLS : MOBILE_GLOBE_CELLS;
-  const frameBudget = tier === 'full' ? FRAME_BUDGET : FRAME_BUDGET * 2;
-  const rotationSpeed = tier === 'full' ? DEG_PER_SEC : DEG_PER_SEC * 0.7;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const shouldAnimate = true;
+  const cellsPerSide = DESKTOP_GLOBE_CELLS;
+  const frameBudget = FRAME_BUDGET;
+  const rotationSpeed = DEG_PER_SEC;
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return undefined;
+    const container = containerRef.current;
+    if (!canvas || !container) return undefined;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return undefined;
 
-    const width = canvas.width;
-    const height = canvas.height;
-    const cells = buildGlobeCells(width, height, cellsPerSide, cellsPerSide);
-    const start = performance.now();
     let raf = 0;
     let lastFrame = 0;
+    let cells: GlobeCell[] = [];
+
+    // Fixed high-res canvas buffer — CSS scales it to fit the container
+    const BUFFER = 1000;
+    canvas.width = BUFFER;
+    canvas.height = BUFFER;
+    cells = buildGlobeCells(BUFFER, BUFFER, cellsPerSide, cellsPerSide);
 
     if (!shouldAnimate) {
-      drawAsciiGlobe(ctx, width, height, 0, cells, cellsPerSide);
+      drawAsciiGlobe(ctx, BUFFER, BUFFER, 0, cells, cellsPerSide);
       return undefined;
     }
 
+    const start = performance.now();
     const tick = (now: number) => {
       raf = requestAnimationFrame(tick);
 
@@ -611,8 +616,8 @@ export default function CompassGlobe() {
       lastFrame = now;
       drawAsciiGlobe(
         ctx,
-        width,
-        height,
+        BUFFER,
+        BUFFER,
         ((now - start) / 1000) * rotationSpeed,
         cells,
         cellsPerSide,
@@ -626,7 +631,7 @@ export default function CompassGlobe() {
 
   return (
     <div
-      className="pointer-events-none absolute left-1/2 top-[54%] z-0 block h-[clamp(190px,52vw,260px)] w-[clamp(190px,52vw,260px)] -translate-x-1/2 -translate-y-1/2 select-none opacity-42 sm:h-[clamp(230px,42vw,320px)] sm:w-[clamp(230px,42vw,320px)] sm:opacity-52 md:left-auto md:right-[4vw] md:top-1/2 md:h-[clamp(500px,40vw,720px)] md:w-[clamp(500px,40vw,720px)] md:translate-x-0 md:opacity-100 xl:right-[5vw]"
+      className="pointer-events-none absolute left-1/2 top-[54%] z-0 hidden h-[clamp(500px,40vw,720px)] w-[clamp(500px,40vw,720px)] -translate-x-1/2 -translate-y-1/2 select-none opacity-42 md:block md:left-auto md:right-[4vw] md:top-1/2 md:h-[clamp(500px,40vw,720px)] md:w-[clamp(500px,40vw,720px)] md:translate-x-0 md:opacity-100 xl:right-[5vw]"
       aria-hidden="true"
     >
       <style>{`
@@ -669,6 +674,7 @@ export default function CompassGlobe() {
       </div>
 
       <div
+        ref={containerRef}
         className="absolute inset-0 overflow-hidden rounded-full"
         style={{
           boxShadow:
@@ -677,8 +683,6 @@ export default function CompassGlobe() {
       >
         <canvas
           ref={canvasRef}
-          width={tier === 'full' ? 800 : 620}
-          height={tier === 'full' ? 800 : 620}
           style={{ width: '100%', height: '100%', display: 'block' }}
         />
       </div>
