@@ -66,7 +66,7 @@ export default function ManifestoSection({
 
         <motion.h2
           variants={reveal}
-          className="max-w-[68rem] text-4xl font-black uppercase leading-[0.98] tracking-normal [text-shadow:0_2px_0_var(--ivory),0_0_16px_var(--ivory),0_0_34px_var(--ivory)] min-[390px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+          className="max-w-[68rem] text-4xl font-black uppercase leading-[0.98] tracking-normal min-[390px]:text-5xl sm:text-6xl md:max-w-[55%] md:text-7xl lg:text-8xl"
         >
           {headline}
         </motion.h2>

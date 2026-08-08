@@ -10,7 +10,7 @@ type GlobeCell = {
   brightness: number;
 };
 
-/* ── Detailed continent & country polygons ─────────────────────────── */
+/* ── Country polygons — each country a unique shade of its continent ── */
 const CONTINENTS: { color: string; points: LonLat[] }[] = [
   // ── NORTH AMERICA ──
   {
@@ -29,9 +29,9 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-168, 72],
     ],
   },
-  // ── ALASKA ──
+  // ── ALASKA (darker orange) ──
   {
-    color: '#ff6600',
+    color: '#dd5500',
     points: [
       [-168, 72], [-162, 64], [-155, 60], [-152, 58],
       [-148, 60], [-140, 60], [-135, 58], [-130, 56],
@@ -39,7 +39,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-165, 66], [-168, 72],
     ],
   },
-  // ── GREENLAND ──
+  // ── GREENLAND (icy cyan) ──
   {
     color: '#66ddff',
     points: [
@@ -48,7 +48,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-65, 78], [-68, 76], [-60, 70], [-55, 60],
     ],
   },
-  // ── CUBA ──
+  // ── CUBA (light amber) ──
   {
     color: '#ffaa44',
     points: [
@@ -56,17 +56,17 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-78, 19], [-82, 20], [-85, 22],
     ],
   },
-  // ── HISPANIOLA (Dominican Republic / Haiti) ──
+  // ── HISPANIOLA (orange-red) ──
   {
-    color: '#ffaa44',
+    color: '#ff8833',
     points: [
       [-74, 20], [-72, 20], [-69, 19], [-68, 18],
       [-72, 18], [-74, 19], [-74, 20],
     ],
   },
-  // ── CENTRAL AMERICA ──
+  // ── CENTRAL AMERICA (muted orange) ──
   {
-    color: '#ff8833',
+    color: '#ee7722',
     points: [
       [-86, 16], [-84, 14], [-83, 10], [-82, 8],
       [-80, 8], [-78, 8], [-77, 8], [-82, 10],
@@ -74,7 +74,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-92, 15], [-92, 18], [-88, 18], [-86, 16],
     ],
   },
-  // ── SOUTH AMERICA ──
+  // ── SOUTH AMERICA (bright yellow) ──
   {
     color: '#ffdd00',
     points: [
@@ -91,7 +91,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-77, 8], [-80, 12],
     ],
   },
-  // ── ICELAND ──
+  // ── ICELAND (pale cyan) ──
   {
     color: '#aaffee',
     points: [
@@ -99,28 +99,27 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-14, 66], [-18, 67], [-22, 66], [-24, 64],
     ],
   },
-  // ── UK + IRELAND ──
+  // ── IRELAND (bright magenta) ──
   {
-    color: '#dd44ff',
+    color: '#ee55ff',
     points: [
-      // Ireland
       [-10, 51], [-8, 51], [-6, 52], [-6, 53],
       [-8, 54], [-10, 54], [-10, 53], [-9, 52], [-10, 51],
     ],
   },
+  // ── GREAT BRITAIN (deep purple) ──
   {
-    color: '#dd44ff',
+    color: '#cc33dd',
     points: [
-      // Great Britain
       [-5, 50], [-3, 50], [0, 51], [2, 53],
       [0, 54], [-1, 55], [-2, 56], [-3, 57],
       [-5, 58], [-6, 57], [-5, 56], [-4, 54],
       [-3, 53], [-4, 52], [-5, 51], [-5, 50],
     ],
   },
-  // ── SCANDINAVIA + NORTHERN EUROPE ──
+  // ── SCANDINAVIA + NORTHERN EUROPE (violet) ──
   {
-    color: '#cc44ff',
+    color: '#bb44ee',
     points: [
       [-10, 36], [-8, 38], [-5, 40], [-8, 44],
       [-5, 44], [-2, 48], [0, 49], [2, 51],
@@ -135,25 +134,25 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-10, 36],
     ],
   },
-  // ── ITALY ──
+  // ── ITALY (blue-purple) ──
   {
-    color: '#cc44ff',
+    color: '#9955ff',
     points: [
       [7, 44], [8, 46], [12, 46], [14, 46],
       [16, 42], [18, 40], [16, 38], [13, 38],
       [15, 40], [14, 42], [12, 44], [7, 44],
     ],
   },
-  // ── GREECE + BALKANS ──
+  // ── GREECE + BALKANS (magenta-purple) ──
   {
-    color: '#cc44ff',
+    color: '#aa33cc',
     points: [
       [20, 42], [22, 42], [24, 42], [26, 42],
       [28, 41], [28, 38], [26, 36], [24, 36],
       [22, 37], [20, 38], [20, 40], [20, 42],
     ],
   },
-  // ── IBARIAN PENINSULA (Spain/Portugal) ──
+  // ── IBERIAN PENINSULA (bright purple) ──
   {
     color: '#cc44ff',
     points: [
@@ -162,7 +161,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-2, 37], [-5, 36], [-8, 36], [-10, 36],
     ],
   },
-  // ── AFRICA ──
+  // ── AFRICA (hot pink) ──
   {
     color: '#ff2299',
     points: [
@@ -186,16 +185,16 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [-5, 34], [-10, 36], [-14, 36], [-18, 35],
     ],
   },
-  // ── MADAGASCAR ──
+  // ── MADAGASCAR (light pink) ──
   {
-    color: '#ff44aa',
+    color: '#ff44bb',
     points: [
       [44, -12], [48, -14], [50, -16], [50, -20],
       [48, -24], [44, -26], [44, -22], [44, -18],
       [44, -14], [44, -12],
     ],
   },
-  // ── ARABIAN PENINSULA ──
+  // ── ARABIAN PENINSULA (amber-orange) ──
   {
     color: '#ff9944',
     points: [
@@ -206,7 +205,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [40, 32], [38, 32], [35, 30],
     ],
   },
-  // ── INDIA ──
+  // ── INDIA (bright cyan) ──
   {
     color: '#00eeff',
     points: [
@@ -217,15 +216,15 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [72, 22], [68, 24], [68, 30], [68, 35],
     ],
   },
-  // ── SRI LANKA ──
+  // ── SRI LANKA (deep teal) ──
   {
-    color: '#00eeff',
+    color: '#00bbdd',
     points: [
       [80, 10], [81, 8], [82, 7], [81, 6],
       [80, 6], [80, 8], [80, 10],
     ],
   },
-  // ── ASIA MAINLAND (Russia + Central/East Asia) ──
+  // ── ASIA MAINLAND (bright green) ──
   {
     color: '#00ff88',
     points: [
@@ -243,9 +242,9 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [28, 70],
     ],
   },
-  // ── CHINA + KOREA ──
+  // ── CHINA + KOREA (medium green) ──
   {
-    color: '#00ff88',
+    color: '#00cc66',
     points: [
       [74, 40], [80, 42], [90, 48], [100, 50],
       [110, 48], [118, 42], [122, 40], [125, 40],
@@ -256,7 +255,7 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [72, 34], [68, 35], [68, 40], [74, 40],
     ],
   },
-  // ── SOUTHEAST ASIA MAINLAND ──
+  // ── SOUTHEAST ASIA MAINLAND (lime) ──
   {
     color: '#aaff00',
     points: [
@@ -266,58 +265,58 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [98, 18], [100, 22],
     ],
   },
-  // ── SUMATRA ──
+  // ── SUMATRA (darker lime) ──
   {
-    color: '#aaff00',
+    color: '#88dd00',
     points: [
       [96, 6], [98, 4], [100, 2], [104, -2],
       [106, -4], [106, -6], [104, -6], [100, -4],
       [98, 0], [96, 4], [96, 6],
     ],
   },
-  // ── JAVA ──
+  // ── JAVA (bright yellow-lime) ──
   {
-    color: '#aaff00',
+    color: '#ccff22',
     points: [
       [106, -6], [108, -6], [112, -7], [114, -8],
       [116, -8], [114, -7], [110, -6], [106, -6],
     ],
   },
-  // ── BORNEO ──
+  // ── BORNEO (warm lime) ──
   {
-    color: '#aaff00',
+    color: '#99ee11',
     points: [
       [108, 6], [112, 4], [116, 4], [118, 2],
       [118, -2], [116, -4], [112, -4], [108, -2],
       [108, 2], [108, 6],
     ],
   },
-  // ── SULAWESI ──
+  // ── SULAWESI (teal-green) ──
   {
-    color: '#aaff00',
+    color: '#44dd66',
     points: [
       [120, 2], [122, 0], [124, -2], [122, -4],
       [120, -4], [118, -2], [120, 0], [120, 2],
     ],
   },
-  // ── PHILIPPINES ──
+  // ── PHILIPPINES (yellow-green) ──
   {
-    color: '#88cc00',
+    color: '#bbff44',
     points: [
       [118, 18], [120, 18], [122, 16], [124, 12],
       [126, 8], [124, 6], [122, 8], [120, 10],
       [118, 12], [118, 16], [118, 18],
     ],
   },
-  // ── TAIWAN ──
+  // ── TAIWAN (emerald) ──
   {
-    color: '#88cc00',
+    color: '#22cc88',
     points: [
       [120, 26], [122, 25], [122, 22], [120, 22],
       [120, 24], [120, 26],
     ],
   },
-  // ── JAPAN (Honshu) ──
+  // ── JAPAN — HONSHU (bright red) ──
   {
     color: '#ff3333',
     points: [
@@ -326,23 +325,23 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [136, 36], [134, 34], [132, 34], [130, 34],
     ],
   },
-  // ── JAPAN (Hokkaido) ──
+  // ── JAPAN — HOKKAIDO (dark red) ──
   {
-    color: '#ff3333',
+    color: '#dd2222',
     points: [
       [140, 42], [142, 44], [145, 44], [146, 42],
       [144, 42], [142, 42], [140, 42],
     ],
   },
-  // ── JAPAN (Kyushu) ──
+  // ── JAPAN — KYUSHU (light red) ──
   {
-    color: '#ff3333',
+    color: '#ff5544',
     points: [
       [130, 34], [132, 34], [132, 32], [130, 30],
       [130, 32], [130, 34],
     ],
   },
-  // ── AUSTRALIA ──
+  // ── AUSTRALIA (amber) ──
   {
     color: '#ffaa00',
     points: [
@@ -355,32 +354,32 @@ const CONTINENTS: { color: string; points: LonLat[] }[] = [
       [115, -14],
     ],
   },
-  // ── TASMANIA ──
+  // ── TASMANIA (dark amber) ──
   {
-    color: '#ffaa00',
+    color: '#dd9900',
     points: [
       [144, -40], [148, -40], [148, -43], [146, -44],
       [144, -43], [144, -40],
     ],
   },
-  // ── NEW ZEALAND (North Island) ──
+  // ── NEW ZEALAND — NORTH ISLAND (coral) ──
   {
-    color: '#44ff88',
+    color: '#ff6655',
     points: [
       [174, -35], [176, -36], [178, -38], [176, -40],
       [174, -40], [174, -38], [174, -36], [174, -35],
     ],
   },
-  // ── NEW ZEALAND (South Island) ──
+  // ── NEW ZEALAND — SOUTH ISLAND (dark coral) ──
   {
-    color: '#44ff88',
+    color: '#ee5544',
     points: [
       [168, -42], [170, -42], [174, -42], [174, -44],
       [172, -46], [170, -46], [168, -46], [166, -44],
       [168, -42],
     ],
   },
-  // ── NEW GUINEA ──
+  // ── NEW GUINEA (yellow-green) ──
   {
     color: '#66cc00',
     points: [
@@ -609,7 +608,7 @@ export default function CompassGlobe() {
 
   return (
     <div
-      className="pointer-events-none absolute left-1/2 top-[54%] z-0 block h-[clamp(190px,52vw,260px)] w-[clamp(190px,52vw,260px)] -translate-x-1/2 -translate-y-1/2 select-none opacity-42 sm:h-[clamp(230px,42vw,320px)] sm:w-[clamp(230px,42vw,320px)] sm:opacity-52 md:left-auto md:right-[4vw] md:top-1/2 md:h-[clamp(500px,40vw,720px)] md:w-[clamp(500px,40vw,720px)] md:translate-x-0 md:opacity-95 xl:right-[5vw]"
+      className="pointer-events-none absolute left-1/2 top-[54%] z-0 block h-[clamp(190px,52vw,260px)] w-[clamp(190px,52vw,260px)] -translate-x-1/2 -translate-y-1/2 select-none opacity-42 sm:h-[clamp(230px,42vw,320px)] sm:w-[clamp(230px,42vw,320px)] sm:opacity-52 md:left-auto md:right-[4vw] md:top-1/2 md:h-[clamp(500px,40vw,720px)] md:w-[clamp(500px,40vw,720px)] md:translate-x-0 md:opacity-100 xl:right-[5vw]"
       aria-hidden="true"
     >
       <style>{`
