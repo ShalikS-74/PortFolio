@@ -347,7 +347,7 @@ export default function CompassGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const tier = useDeviceTier();
   const shouldAnimate = tier !== 'minimal';
-  const cellsPerSide = tier === 'full' ? DESKTOP_GLOBE_CELLS : MOBILE_GLOBE_CELLS;
+  const cellsPerSide = DESKTOP_GLOBE_CELLS;
   const frameBudget = tier === 'full' ? FRAME_BUDGET : FRAME_BUDGET * 2;
   const rotationSpeed = tier === 'full' ? DEG_PER_SEC : DEG_PER_SEC * 0.28;
 
