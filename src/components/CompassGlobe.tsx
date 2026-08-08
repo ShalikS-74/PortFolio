@@ -493,13 +493,11 @@ function drawAsciiGlobe(
   rows: number,
 ) {
   ctx.clearRect(0, 0, width, height);
-  // Fill with darkest ocean color so any micro-gaps blend in
-  ctx.fillStyle = '#080820';
+  ctx.fillStyle = '#000008';
   ctx.fillRect(0, 0, width, height);
 
-  const cellWidth = width / rows;
   const cellHeight = height / rows;
-  ctx.font = `bold ${(cellHeight * 0.95).toFixed(1)}px "JetBrains Mono", "Courier New", monospace`;
+  ctx.font = `bold ${(cellHeight * 0.9).toFixed(1)}px "JetBrains Mono", "Courier New", monospace`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
@@ -527,11 +525,7 @@ function drawAsciiGlobe(
       b = Math.round(210 + 45 * cell.brightness);
     }
 
-    const colorStr = `rgb(${r}, ${g}, ${b})`;
-    // Draw a filled rectangle behind each character to eliminate gaps between cells
-    ctx.fillStyle = colorStr;
-    ctx.fillRect(cell.px - cellWidth / 2, cell.py - cellHeight / 2, cellWidth, cellHeight);
-    ctx.fillStyle = colorStr;
+    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
     ctx.fillText(char, cell.px, cell.py);
   }
 }
